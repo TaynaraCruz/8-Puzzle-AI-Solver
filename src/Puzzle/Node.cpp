@@ -10,6 +10,7 @@ Node::Node(){
     }
 
     this->parent = nullptr;
+    this->curr_cost = 0;
 }
 
 Node::Node(int state[N][N], Node *parent){
@@ -21,6 +22,7 @@ Node::Node(int state[N][N], Node *parent){
     }
 
     this->parent = parent;
+    this->curr_cost = parent->curr_cost + 1;
 }
 
 void Node::Add_child(Node child){

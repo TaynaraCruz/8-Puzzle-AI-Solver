@@ -8,9 +8,13 @@ class Puzzle{
     private:
         int puzzle_solution[N][N];
     public:
-        bool solution;
         Puzzle();
         bool check_solution(int curr_solution[N][N]);
+
+        int** move_right(int curr_state[N][N]);
+        int** move_left(int curr_state[N][N]);
+        int** move_up(int curr_state[N][N]);
+        int** move_down(int curr_state[N][N]);
 };
 
 #endif

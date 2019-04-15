@@ -1,8 +1,6 @@
 #include "Puzzle.h"
 
 Puzzle::Puzzle(){//O(N²)
-    
-    this->solution = false;
 
     this->puzzle_solution[N-1][N-1] = 0;
 
@@ -22,6 +20,12 @@ bool Puzzle::check_solution(int curr_solution[N][N]){ //O(N²)
             if(this->puzzle_solution[i][j] != curr_solution[i][j]) return false;
         }
     }
-    this->solution = true;
     return true;
 }
+
+int** move_right(int curr_state[N][N]){
+    //alocate memory
+}
+int** move_left(int curr_state[N][N]);
+int** move_up(int curr_state[N][N]);
+int** move_down(int curr_state[N][N]);

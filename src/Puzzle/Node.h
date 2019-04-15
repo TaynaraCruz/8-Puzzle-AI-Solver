@@ -9,6 +9,7 @@ class Node{
         int state[N][N];
         std::vector<Node> children;
         Node *parent;
+        int curr_cost;
 
         Node();
         Node(int state[N][N], Node *parent);
