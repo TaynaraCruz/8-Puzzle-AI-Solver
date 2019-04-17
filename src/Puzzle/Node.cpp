@@ -34,11 +34,11 @@ Node::Node(Node *parent){
 
 Node::~Node(){
     //Free memory
-    for(int i = 0; i < N; i++){
+   /* for(int i = 0; i < N; i++){
         delete [] this->state[i];
     }
     delete [] this->state;
-
+*/
 }
 
 void Node::Add_child(Node child){

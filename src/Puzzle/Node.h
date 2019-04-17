@@ -8,7 +8,7 @@ class Node{
     public:
         int** state;
         std::vector<Node> children;
-        Node *parent;
+        Node * parent;
         int curr_cost;
 
         Node();

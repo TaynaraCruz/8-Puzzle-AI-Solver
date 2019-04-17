@@ -1,20 +1,19 @@
 #include <iostream>
 #include <cmath>
-#include <queue>
-#include <set>
+#include <list>
 
 #include "../Puzzle/Node.h"
 #include "../Puzzle/Puzzle.h"
 
 
-bool check_explored(std::set<int**> Explored, int** state){
+bool check(std::list<Node> Explored, Node State){
     bool explore = true;
-    std::set<int**>::iterator it;
+    std::list<Node>::iterator it;
     for(it=Explored.begin(); it!=Explored.end(); ++it){
         bool explore = true;
         for(int i = 0; i < N; i++){
             for(int j = 0; j < N; j++){
-                if((*it)[i][j] != state[i][j]) explore = false;
+                if(it->state[i][j] != State.state[i][j]) explore = false;
             }
         }
         if(explore) return true;
@@ -25,11 +24,12 @@ bool check_explored(std::set<int**> Explored, int** state){
 
 int BFS(Puzzle P, Node State){
 
-    std::queue<Node> Frontier;
-    std::set<int**> Explored;
+    std::list<Node> Frontier;/*Push back - Pop front*/
+    std::list<Node> Explored;/*Push back*/
 
-    Frontier.push(State);
+    Frontier.push_back(State);
     Node curr = Frontier.front();
+    
     while(1){
         if(Frontier.empty()) return -1; //This means faliure
         curr = Frontier.front();
@@ -38,40 +38,41 @@ int BFS(Puzzle P, Node State){
         if(P.check_solution(curr.state)){
             return curr.curr_cost;
         }
+
+        Explored.push_back(curr);
+        Frontier.pop_front();
         
-        /*for(int i = 0; i < N; i++){
-            for(int j = 0; j < N; j++){
-                std::cout<<curr.state[i][j]<<" ";
-            }
-            std::cout<<"\n";
+        //Actions
+        Node child1 = Node(&curr);
+        P.move_right(child1.state,curr.state);
+        if(!check(Explored, child1)&& !check(Frontier, child1) ){
+            
+            curr.Add_child(child1);
+            Frontier.push_back(child1);
         }
-        std::cout<<"\n";
-        getchar();*/
 
-        Explored.insert(curr.state);
-        Frontier.pop();
-
-        Node next1 = Node(&curr);
+        Node child2 = Node(&curr);
+        P.move_left(child2.state,curr.state);
+        if(!check(Explored, child2)&& !check(Frontier, child2)){
+            
+            curr.Add_child(child2);
+            Frontier.push_back(child2);
+        }
         
-        P.move_right(next1.state,curr.state);
-        if(!check_explored(Explored, next1.state)){
-            Frontier.push(next1);
+        Node child3 = Node(&curr);
+        P.move_up(child3.state,curr.state);
+        if(!check(Explored, child3)&& !check(Frontier, child3)){
+            
+            curr.Add_child(child3);
+            Frontier.push_back(child3);
         }
-
-        Node next2 = Node(&curr);
-        P.move_left(next2.state,curr.state);
-        if(!check_explored(Explored, next2.state)){
-            Frontier.push(next2);
-        }
-        Node next3 = Node(&curr);
-        P.move_up(next3.state,curr.state);
-        if(!check_explored(Explored, next3.state)){
-            Frontier.push(next3);
-        }
-        Node next4 = Node(&curr);
-        P.move_down(next4.state,curr.state);
-        if(!check_explored(Explored, next4.state)){
-            Frontier.push(next4);
+        
+        Node child4 = Node(&curr);
+        P.move_down(child4.state,curr.state);
+        if(!check(Explored, child4)&& !check(Frontier, child4)){
+            
+            curr.Add_child(child4);
+            Frontier.push_back(child4);
         }
 
 
@@ -85,7 +86,7 @@ int main(){
     Node Inital_state = Node();
 
 
-    //I want to calculate the mininum number of steps to reach the solution
+    //I want to calculate the number of steps to reach the solution
     int num_steps = 0;
     
     num_steps = BFS(P, Inital_state);
