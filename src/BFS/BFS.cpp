@@ -8,11 +8,22 @@
 #include "../Puzzle/Puzzle.h"
 
 
-bool check_explored(std::set<Node> Explored, Node elem){
-    if(Explored.find(elem) != Explored.end()) return true;
-    else return false;
+bool check_explored(std::set<int**> Explored, int** state){
+    bool explore = true;
+    std::set<int**>::iterator it;
+    for(it=Explored.begin(); it!=Explored.end(); ++it){
+        bool explore = true;
+        for(int i = 0; i < N; i++){
+            for(int j = 0; j < N; j++){
+                if((*it)[i][j] != state[i][j]) explore = false;
+            }
+        }
+        if(explore) return true;
+    }
+    return false;
+    
 }
-
+/*
 int BFS(Puzzle P, Node State){
     
     int num_steps = 0;
@@ -48,14 +59,14 @@ int BFS(Puzzle P, Node State){
         Node child = Node(state_child, n);
         n.add_child(child);
 
-        */
+        
 
 
     }
 
 
 
-}
+}*/
 
 int main(){
 
@@ -63,10 +74,10 @@ int main(){
     Puzzle P = Puzzle();
     Node Inital_state = Node();
 
-    //I want to calculate the mininum number of steps to reach the solution
-    int num_steps;
 
-    num_steps = BFS(P, Inital_state);
+    //I want to calculate the mininum number of steps to reach the solution
+    int num_steps = 0;
+    
 
     if(num_steps > 0) std::cout<<"Solution: "<<num_steps<<std::endl;
     else std::cout<<"There's No Solution"<<std::endl;
