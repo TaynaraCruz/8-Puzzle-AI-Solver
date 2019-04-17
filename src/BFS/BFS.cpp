@@ -25,28 +25,34 @@ bool check_explored(std::set<int**> Explored, int** state){
 
 int BFS(Puzzle P, Node State){
 
-    int num_steps = 0;
     std::queue<Node> Frontier;
     std::set<int**> Explored;
 
     Frontier.push(State);
-    Node curr = Frontier.front();;
+    Node curr = Frontier.front();
     while(1){
         if(Frontier.empty()) return -1; //This means faliure
         curr = Frontier.front();
         
         //Goal test
         if(P.check_solution(curr.state)){
-            //return num_steps;
-            break;
+            return curr.curr_cost;
         }
         
-        
+        /*for(int i = 0; i < N; i++){
+            for(int j = 0; j < N; j++){
+                std::cout<<curr.state[i][j]<<" ";
+            }
+            std::cout<<"\n";
+        }
+        std::cout<<"\n";
+        getchar();*/
+
         Explored.insert(curr.state);
         Frontier.pop();
 
         Node next1 = Node(&curr);
-
+        
         P.move_right(next1.state,curr.state);
         if(!check_explored(Explored, next1.state)){
             Frontier.push(next1);
@@ -70,13 +76,6 @@ int BFS(Puzzle P, Node State){
 
 
     }
-    std::cout<<"Aqui!!!"<<"\n";
-    Node *solution = &curr;
-    while(solution != nullptr){
-        solution = curr.parent;
-        num_steps++;
-    }
-    return num_steps;
 }
 
 int main(){
@@ -91,7 +90,7 @@ int main(){
     
     num_steps = BFS(P, Inital_state);
 
-    if(num_steps > 0) std::cout<<"Solution: "<<num_steps<<std::endl;
+    if(num_steps >= 0) std::cout<<"Solution: "<<num_steps<<std::endl;
     else std::cout<<"There's No Solution"<<std::endl;
 
 
