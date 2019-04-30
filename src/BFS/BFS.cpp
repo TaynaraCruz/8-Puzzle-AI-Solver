@@ -7,11 +7,11 @@
 #include "../Puzzle/Puzzle.h"
 
 
-bool check(std::list<Node*> Explored, Node *State){
+bool check(std::list<Node*> Frontier, Node *State){
     
     std::list<Node*>::iterator it;
     
-    for(it=Explored.begin(); it!=Explored.end(); ++it){
+    for(it=Frontier.begin(); it!=Frontier.end(); ++it){
         
         bool found = true;//stop checking if one element is different
         
@@ -31,6 +31,8 @@ bool check(std::list<Node*> Explored, Node *State){
     return false;
 }
 
+
+
 int BFS(Puzzle* puzzle, Node *State){
 
     std::list<Node*> Frontier;/*Push back - Pop front*/
@@ -42,6 +44,7 @@ int BFS(Puzzle* puzzle, Node *State){
         //Goal test
         if(puzzle->check_solution(curr->state)){
             std::cout<<"\nExplored: "<<Explored.size()<<"\n";
+            std::cout<<"Frontier: "<<Frontier.size()<<"\n";
             return curr->curr_cost;
         }
     
@@ -61,6 +64,7 @@ int BFS(Puzzle* puzzle, Node *State){
             //Goal test
             if(puzzle->check_solution(child1->state)){
                 std::cout<<"\nExplored: "<<Explored.size()<<"\n";
+                std::cout<<"Frontier: "<<Frontier.size()<<"\n";
                 return child1->curr_cost;
             }
             
@@ -75,6 +79,7 @@ int BFS(Puzzle* puzzle, Node *State){
             //Goal test
             if(puzzle->check_solution(child2->state)){
                 std::cout<<"\nExplored: "<<Explored.size()<<"\n";
+                std::cout<<"Frontier: "<<Frontier.size()<<"\n";
                 return child2->curr_cost;
             }
             
@@ -89,6 +94,7 @@ int BFS(Puzzle* puzzle, Node *State){
             //Goal test
             if(puzzle->check_solution(child3->state)){
                 std::cout<<"\nExplored: "<<Explored.size()<<"\n";
+                std::cout<<"Frontier: "<<Frontier.size()<<"\n";
                 return child3->curr_cost;
             }
             
@@ -103,6 +109,7 @@ int BFS(Puzzle* puzzle, Node *State){
             //Goal test
             if(puzzle->check_solution(child4->state)){
                 std::cout<<"\nExplored: "<<Explored.size()<<"\n";
+                std::cout<<"Frontier: "<<Frontier.size()<<"\n";
                 return child4->curr_cost;
             }
             

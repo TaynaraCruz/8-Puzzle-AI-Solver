@@ -12,6 +12,7 @@ class Node{
 
         Node();
         Node(Node *parent);
-};
 
+       
+};
 #endif
