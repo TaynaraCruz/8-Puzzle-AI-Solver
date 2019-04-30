@@ -6,18 +6,12 @@
 
 class Node{
     public:
-        int** state;
-        std::vector<Node> children;
+        int state[N][N];
         Node * parent;
         int curr_cost;
 
         Node();
         Node(Node *parent);
-        ~Node();
-        void Add_child(Node child);
-
-
 };
-
 
 #endif

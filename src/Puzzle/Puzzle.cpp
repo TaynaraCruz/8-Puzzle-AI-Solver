@@ -13,7 +13,7 @@ Puzzle::Puzzle(){//O(N²)
     }
 }
 
-bool Puzzle::check_solution(int **curr_solution){ //O(N²)
+bool Puzzle::check_solution(int curr_solution[N][N]){ //O(N²)
     
     for(int i = 0; i < N; i++){
         for(int j = 0; j < N; j++){
@@ -23,7 +23,7 @@ bool Puzzle::check_solution(int **curr_solution){ //O(N²)
     return true;
 }
 
-void Puzzle::move_right(int **new_state, int **curr_state){
+void Puzzle::move_right(int new_state[N][N], int curr_state[N][N]){
 
     for(int i = 0; i <  N; i++){
         for(int j = 0; j < N; j++){
@@ -41,7 +41,7 @@ void Puzzle::move_right(int **new_state, int **curr_state){
     }
 
 }
-void Puzzle::move_left(int** new_state, int** curr_state){
+void Puzzle::move_left(int new_state[N][N], int curr_state[N][N]){
     
     for(int i = 0; i <  N; i++){
         for(int j = 0; j < N; j++){
@@ -58,7 +58,7 @@ void Puzzle::move_left(int** new_state, int** curr_state){
     }
 
 }
-void Puzzle::move_up(int** new_state, int** curr_state){
+void Puzzle::move_up(int new_state[N][N], int curr_state[N][N]){
     
     for(int i = 0; i <  N; i++){
         for(int j = 0; j < N; j++){
@@ -75,7 +75,7 @@ void Puzzle::move_up(int** new_state, int** curr_state){
     }
 
 }
-void Puzzle::move_down(int** new_state, int** curr_state){
+void Puzzle::move_down(int new_state[N][N], int curr_state[N][N]){
     int x = -1;
     int y = -1;
 
