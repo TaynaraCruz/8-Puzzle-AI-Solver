@@ -1,6 +1,6 @@
 #include "Puzzle.h"
 
-Puzzle::Puzzle(){//O(N²)
+Puzzle::Puzzle(){
 
     this->puzzle_solution[N-1][N-1] = 0;
 
@@ -13,7 +13,7 @@ Puzzle::Puzzle(){//O(N²)
     }
 }
 
-bool Puzzle::check_solution(int curr_solution[N][N]){ //O(N²)
+bool Puzzle::check_solution(int curr_solution[N][N]){ 
     
     for(int i = 0; i < N; i++){
         for(int j = 0; j < N; j++){
