@@ -1,10 +1,12 @@
 #include <iostream>
 #include <string>
 #include "BFS/BFS.h"
+#include "UCS/UCS.h"
+#include "IDS/IDS.h"
 
-std::string 
+//std::string 
 
-int main(int argc, char*agrv[]){
+int main(){
 
     //Start Puzzle
     Puzzle *puzzle = new Puzzle();
@@ -13,8 +15,8 @@ int main(int argc, char*agrv[]){
 
     //I want to calculate the number of steps to reach the solution
     int num_steps = 0;
-    
-    num_steps = BFS(puzzle, Inital_state);
+
+    num_steps = IDS(puzzle, Inital_state);
 
     if(num_steps >= 0) std::cout<<"Solution: "<<num_steps<<std::endl;
     else std::cout<<"There's No Solution"<<std::endl;
@@ -24,14 +26,4 @@ int main(int argc, char*agrv[]){
 
     return 0;
 
-}
-
-void ParseArgs(int argc, char*argv[]){
-    for(int i = 1; i < argc; i++){
-        std::string arg = argv[i];
-
-        if(arg == "-BFS"){
-
-        }
-    }
 }

@@ -5,5 +5,4 @@
 #include "../Puzzle/Puzzle.h"
 
 int BFS(Puzzle* puzzle, Node *State);
-
 #endif

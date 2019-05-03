@@ -1,26 +1,20 @@
-#include <deque>
+#include <list>
 #include <iostream>
 #include <algorithm>
 #include <unordered_set>
-#include "BFS.h"
+#include "IDS.h"
 
-int BFS(Puzzle* puzzle, Node *State){
+int L_DFS_Rec(Puzzle* puzzle, Node *State, int limit, int cut_off){
 
-    std::deque <Node*> Frontier;/*Push back - Pop front*/
-    std::unordered_set<int> Explored;
-    
-    Frontier.push_back(State);
-    Node *curr = Frontier.front();
-    
+    Node *curr = State;
+
     //Goal test
     if(puzzle->check_solution(curr->state)) return curr->curr_cost;
+    else if (limit == 0) return cut_off;
+    else{
+        bool cut_off_occurred = false;
     
-    while(!Frontier.empty()){
-        
-        curr = Frontier.front();
-        Explored.insert(curr->intg_node);
-        Frontier.pop_front();
-        
+    
         /**************************Actions***********************/
         
         Node* child1 = new Node(curr);
@@ -45,21 +39,35 @@ int BFS(Puzzle* puzzle, Node *State){
 
 
         /**************************Check***********************/
-
-        for(int i = 0; i < (int)curr->children.size(); i++){
-            auto q = std::find(Frontier.begin(),Frontier.end(), curr->children[i]);
-            
-            if(Explored.find(curr->children[i]->intg_node) == Explored.end() &&  q == Frontier.end()){
-            
-                //Goal test
-                if(puzzle->check_solution(curr->children[i]->state)) return curr->children[i]->curr_cost;
-                
-                Frontier.push_back(curr->children[i]);
-            }
-            else delete curr->children[i];
-        }
         
-    }
+        for(int i = 0; i < (int)curr->children.size(); i++){
 
-    return -1; //This means faliure
+            int result = L_DFS_Rec(puzzle, curr->children[i], limit-1, cut_off);
+            if(result == cut_off) cut_off_occurred = true;
+            else if(result > 0) return result;
+            
+        }
+        if(cut_off_occurred) return cut_off;
+        else return -1;
+    }
+    
+}
+
+int L_DFS(Puzzle* puzzle, Node *State, int limit){
+    int cut_off = limit+1;
+    return L_DFS_Rec(puzzle, State, limit, cut_off);
+    
+}
+
+int IDS(Puzzle* puzzle, Node *State){
+    bool found = false;
+    int result;
+    int limit = 0;
+    while(!found){
+        result = L_DFS(puzzle, State, limit);
+        if(result != limit+1) found = true;
+        limit++;
+    }
+    return result;
+    
 }
