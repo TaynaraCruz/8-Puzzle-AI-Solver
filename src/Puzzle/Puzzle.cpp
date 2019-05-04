@@ -1,4 +1,7 @@
 #include "Puzzle.h"
+#include <cmath>
+
+int Puzzle::puzzle_solution[N][N] {0};
 
 Puzzle::Puzzle(){
 
@@ -21,6 +24,45 @@ bool Puzzle::check_solution(int curr_solution[N][N]){
         }
     }
     return true;
+}
+
+void Puzzle::find_right_place(int &lin, int &col, int elem){
+    for(int i = 0; i < N; i++){
+        for(int j = 0; j < N; j++){
+            if(puzzle_solution[i][j] == elem){
+                lin = i;
+                col = j;
+                return;
+            }
+        }
+    }
+}
+
+int Puzzle::calculate_heuristic(int curr_solution[N][N], std::string type){
+    int result = 0;
+    
+    if(type == "Greedy"){//heuristic: number of elements out of place
+        for(int i = 0; i < N; i++){
+            for(int j = 0; j < N; j++){
+                if(puzzle_solution[i][j] != curr_solution[i][j]) result++;
+            }
+        }
+    }
+    /*else if(type == "Astar"){//heuristic: Manhattan Distance from right place
+        
+        for(int i = 0; i < N; i++){
+            for(int j = 0; j < N; j++){
+                if(puzzle_solution[i][j] != curr_solution[i][j]){
+                    int lin=-1, col=-1;
+                    Puzzle::find_right_place(lin, col, curr_solution[i][j]);
+
+                    result += (abs(lin - i) + abs(col - j));//Manhattan Distance sum
+                }
+            }
+        }
+    }**/
+    
+    return result;
 }
 
 void Puzzle::move_right(int new_state[N][N], int curr_state[N][N]){

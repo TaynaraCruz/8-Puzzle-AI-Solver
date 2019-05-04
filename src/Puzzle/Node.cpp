@@ -1,6 +1,8 @@
 #include <iostream>
 #include <stdio.h>
 #include <cmath>
+#include <string>
+
 #include "Node.h"
 
 int Node::initial_state[N][N] {0};
@@ -26,6 +28,11 @@ void Node::convert_node(){
     this->intg_node = result;
 }
 
+void Node::set_heuristic(std::string type){
+    if(type == "Greedy") this->heuristic = Puzzle::calculate_heuristic(this->state, type);//g
+    else if (type == "Astar") this->heuristic = Puzzle::calculate_heuristic(this->state, type) + this->curr_cost;// h + g
+}
+
 Node::Node(){
 
     FILE * pFile;
@@ -41,6 +48,7 @@ Node::Node(){
     this->parent = nullptr;
     this->curr_cost = 0;
     this->convert_node();
+    this->heuristic = 0;
 }
 
 Node::Node(Node *parent){
@@ -53,3 +61,4 @@ Node::Node(Node *parent){
 void Node::Add_child(Node* child){
     this->children.push_back(child);
 }
+

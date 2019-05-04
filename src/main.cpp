@@ -3,6 +3,8 @@
 #include "BFS/BFS.h"
 #include "UCS/UCS.h"
 #include "IDS/IDS.h"
+#include "GreedyBFS/GreedyBFS.h"
+#include "Astar/Astar.h"
 
 //std::string 
 
@@ -15,8 +17,7 @@ int main(){
 
     //I want to calculate the number of steps to reach the solution
     int num_steps = 0;
-
-    num_steps = IDS(puzzle, Inital_state);
+    num_steps = Astar(puzzle, Inital_state);
 
     if(num_steps >= 0) std::cout<<"Solution: "<<num_steps<<std::endl;
     else std::cout<<"There's No Solution"<<std::endl;
