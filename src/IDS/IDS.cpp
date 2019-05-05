@@ -4,16 +4,19 @@
 #include <unordered_set>
 #include "IDS.h"
 
+std::unordered_set<int> Explored;
+
 int L_DFS_Rec(Puzzle* puzzle, Node *State, int limit, int cut_off){
 
     Node *curr = State;
-
+    
     //Goal test
     if(puzzle->check_solution(curr->state)) return curr->curr_cost;
     else if (limit == 0) return cut_off;
     else{
         bool cut_off_occurred = false;
-    
+        Explored.insert(curr->intg_node);
+
     
         /**************************Actions***********************/
         
@@ -41,15 +44,20 @@ int L_DFS_Rec(Puzzle* puzzle, Node *State, int limit, int cut_off){
         /**************************Check***********************/
         
         for(int i = 0; i < (int)curr->children.size(); i++){
+            int result = 0;
 
-            int result = L_DFS_Rec(puzzle, curr->children[i], limit-1, cut_off);
+            if(Explored.find(curr->children[i]->intg_node) == Explored.end()) {
+
+                result = L_DFS_Rec(puzzle, curr->children[i], limit-1, cut_off);
+            }
             if(result == cut_off) cut_off_occurred = true;
             else if(result > 0) return result;
-            
+               
         }
         if(cut_off_occurred) return cut_off;
         else return -1;
     }
+    
     
 }
 
@@ -65,8 +73,10 @@ int IDS(Puzzle* puzzle, Node *State){
     int limit = 0;
     while(!found){
         result = L_DFS(puzzle, State, limit);
-        if(result != limit+1) found = true;
+        if(result < limit+1) found = true;
+       // std::cout<<"Limit: "<<limit<<" result: "<<result<<std::endl;
         limit++;
+        Explored.clear();
     }
     return result;
     
