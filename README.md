@@ -15,4 +15,4 @@ Nome dos algoritmos no terminal:
 * Greedy best-first search: GreedyBFS
 * Hill Climbing: HillClimbing
 
-Ao executar o algoritmo Hill Climbing também é preciso escolher o numero máximo k permitido para movimentos laterais.
+Ao executar o algoritmo Hill Climbing também é preciso escolher o numero máximo k permitido para movimentos laterais. Essa opção aparecerá após executar no terminal ./puzzle HillClimbing nome_do_arquivo
