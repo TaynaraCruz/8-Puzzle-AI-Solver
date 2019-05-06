@@ -43,7 +43,10 @@ int GreedyBFS(Puzzle* puzzle, Node *State){
         Frontier.erase(curr->intg_node);
         Frontier_map.erase(curr->intg_node);
 
-        if(puzzle->check_solution(curr->state)) return curr->curr_cost;
+        if(puzzle->check_solution(curr->state)) {
+            std::cout<<"Explored states: "<<Explored.size()<<std::endl;
+            return curr->curr_cost;
+        }
         
         /**************************Actions***********************/
         

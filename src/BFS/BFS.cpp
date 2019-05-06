@@ -13,7 +13,10 @@ int BFS(Puzzle* puzzle, Node *State){
     Node *curr = Frontier.front();
     
     //Goal test
-    if(puzzle->check_solution(curr->state)) return curr->curr_cost;
+    if(puzzle->check_solution(curr->state)){
+        std::cout<<"Explored states: "<<Explored.size()<<std::endl;
+        return curr->curr_cost;
+    } 
     
     while(!Frontier.empty()){
         
@@ -52,7 +55,10 @@ int BFS(Puzzle* puzzle, Node *State){
             if(Explored.find(curr->children[i]->intg_node) == Explored.end() &&  q == Frontier.end()){
             
                 //Goal test
-                if(puzzle->check_solution(curr->children[i]->state)) return curr->children[i]->curr_cost;
+                if(puzzle->check_solution(curr->children[i]->state)){
+                    std::cout<<"Explored states: "<<Explored.size()<<std::endl;
+                    return curr->children[i]->curr_cost;
+                } 
                 
                 Frontier.push_back(curr->children[i]);
             }

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <chrono>
+#include <iomanip>
 #include "BFS/BFS.h"
 #include "UCS/UCS.h"
 #include "IDS/IDS.h"
@@ -14,6 +15,8 @@ int main(int argc, char*argv[]){
         std::cout<<"Error: ./puzzle 'algorithm' 'file number'"<<std::endl;
         return 1;
     }
+
+    std::cout<<std::fixed<<std::setprecision(5);
     
     //Start Puzzle
     Puzzle *puzzle = new Puzzle();
@@ -34,7 +37,7 @@ int main(int argc, char*argv[]){
         auto end = std::chrono::steady_clock::now();
         auto diff = end - start;
 
-        std::cout <<"Time execution: "<< std::chrono::duration <double, std::ratio<1>> (diff).count() << " s" << std::endl;
+        std::cout <<"Time execution: "<< std::chrono::duration <double, std::milli> (diff).count() <<" ms"<< std::endl;
 
     }
     else if(func == "IDS"){
@@ -49,7 +52,7 @@ int main(int argc, char*argv[]){
         auto end = std::chrono::steady_clock::now();
         auto diff = end - start;
 
-        std::cout <<"Time execution: "<< std::chrono::duration <double, std::ratio<1>> (diff).count() << " s" << std::endl;
+        std::cout <<"Time execution: "<< std::chrono::duration <double, std::milli> (diff).count() << " ms" << std::endl;
     }
     else if(func == "UCS"){
         
@@ -63,7 +66,7 @@ int main(int argc, char*argv[]){
         auto end = std::chrono::steady_clock::now();
         auto diff = end - start;
 
-        std::cout <<"Time execution: "<< std::chrono::duration <double, std::ratio<1>> (diff).count() << " s" << std::endl;
+        std::cout <<"Time execution: "<< std::chrono::duration <double, std::milli> (diff).count() << " ms" << std::endl;
     }
     else if(func == "Astar"){
         
@@ -77,7 +80,7 @@ int main(int argc, char*argv[]){
         auto end = std::chrono::steady_clock::now();
         auto diff = end - start;
 
-        std::cout <<"Time execution: "<< std::chrono::duration <double, std::ratio<1>> (diff).count() << " s" << std::endl;
+        std::cout <<"Time execution: "<< std::chrono::duration <double, std::milli> (diff).count() << " ms" << std::endl;
     }
     else if(func == "GreedyBFS"){
         
@@ -91,7 +94,7 @@ int main(int argc, char*argv[]){
         auto end = std::chrono::steady_clock::now();
         auto diff = end - start;
 
-        std::cout <<"Time execution: "<< std::chrono::duration <double, std::ratio<1>> (diff).count() << " s" << std::endl;
+        std::cout <<"Time execution: "<< std::chrono::duration <double, std::milli> (diff).count() << " ms" << std::endl;
     }
     else if(func == "HillClimbing"){
         
@@ -109,7 +112,7 @@ int main(int argc, char*argv[]){
         auto end = std::chrono::steady_clock::now();
         auto diff = end - start;
 
-        std::cout <<"Time execution: "<< std::chrono::duration <double, std::ratio<1>> (diff).count() << " s" << std::endl;
+        std::cout <<"Time execution: "<< std::chrono::duration <double, std::milli> (diff).count() << " ms" << std::endl;
     }
     else
     {

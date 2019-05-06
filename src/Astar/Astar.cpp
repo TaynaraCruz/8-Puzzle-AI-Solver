@@ -41,8 +41,10 @@ int Astar(Puzzle* puzzle, Node *State){
         Frontier_map.erase(curr->intg_node);
 
         //Goal
-        if(puzzle->check_solution(curr->state)) return curr->curr_cost;
-        
+        if(puzzle->check_solution(curr->state)) {
+            std::cout<<"Explored states: "<<Explored.size()<<std::endl;
+            return curr->curr_cost;
+        }        
         /**************************Actions***********************/
         
         Node* child1 = new Node(curr);
